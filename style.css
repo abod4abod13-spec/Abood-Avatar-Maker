@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Abood Avatar Maker - Dark Studio Theme (2026)
+   Abood Avatar Maker - Ultimate Studio Theme (2026)
    ========================================================================== */
 
 :root {
@@ -106,6 +106,33 @@ body {
 
 @keyframes fillProgress { 0% { width: 0%; } 100% { width: 100%; } }
 
+/* شريط الإشعارات */
+.toast-container {
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.toast-message {
+    background: rgba(19, 27, 46, 0.95);
+    border: 1px solid var(--color-accent);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    animation: toastSlide 0.4s ease, toastFade 0.4s 3.6s forwards;
+}
+
+@keyframes toastSlide { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes toastFade { to { opacity: 0; transform: translateY(-10px); } }
+
 header {
     background-color: rgba(10, 15, 28, 0.75);
     backdrop-filter: blur(15px);
@@ -141,15 +168,56 @@ header {
 
 .hero {
     text-align: center;
-    padding: 70px 20px 30px;
+    padding: 60px 20px 30px;
     background: radial-gradient(circle at top, rgba(59, 130, 246, 0.15) 0%, transparent 60%);
 }
 
-.hero h1 { font-size: 38px; font-weight: 900; margin-bottom: 15px; }
-.hero p { color: var(--text-muted); font-size: 17px; max-width: 650px; margin: 0 auto; }
+.hero h1 { font-size: 36px; font-weight: 900; margin-bottom: 15px; }
+.hero p { color: var(--text-muted); font-size: 16px; max-width: 650px; margin: 0 auto; }
 
-/* شبكة الاستوديو المحترفة */
-.editor-container { max-width: 1100px; margin: 0 auto 60px; padding: 0 20px; }
+/* كرت البروفايل */
+.profile-container { max-width: 800px; margin: 0 auto 30px; padding: 0 20px; }
+.profile-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+}
+
+.profile-card h2 { font-size: 20px; font-weight: 800; }
+.subtitle { font-size: 13px; color: var(--text-muted); margin-bottom: 15px; }
+
+.profile-form { display: flex; flex-direction: column; gap: 15px; align-items: center; }
+#userNameInput {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px 18px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background: rgba(0,0,0,0.3);
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    outline: none;
+}
+
+.gender-selector { display: flex; gap: 12px; }
+.gender-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border-color);
+    padding: 8px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    color: white;
+    font-size: 14px;
+}
+
+.gender-btn.active { border-color: var(--color-primary); background: rgba(59, 130, 246, 0.2); }
+
+/* شبكة الاستوديو */
+.editor-container { max-width: 1150px; margin: 0 auto 60px; padding: 0 20px; }
 .editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
 @media (max-width: 850px) { .editor-grid { grid-template-columns: 1fr; } }
 
@@ -165,6 +233,20 @@ header {
 
 .control-group { margin-bottom: 18px; text-align: right; }
 .control-group label { display: block; font-size: 14px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; }
+
+.tools-btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.tool-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border-color);
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.tool-btn:hover { background: rgba(59, 130, 246, 0.2); border-color: var(--color-primary); }
 
 .styled-select, input[type="range"] {
     width: 100%;
@@ -187,10 +269,34 @@ input[type="color"] {
     background: none;
 }
 
-/* لوحة المعاينة والـ Canvas */
+/* شبكة الملصقات */
+.stickers-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-height: 150px;
+    overflow-y: auto;
+    background: rgba(0,0,0,0.2);
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.sticker-item {
+    font-size: 22px;
+    padding: 6px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    user-select: none;
+}
+.sticker-item:hover { transform: scale(1.2); background: rgba(59, 130, 246, 0.2); }
+
+/* المعاينة والـ Canvas */
 .preview-card { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
 .canvas-wrapper { margin: 20px 0; border-radius: 50%; padding: 10px; background: rgba(255,255,255,0.02); border: 1px dashed var(--border-color); }
-#avatarCanvas { width: 280px; height: 280px; border-radius: 50%; display: block; }
+#avatarCanvas { width: 300px; height: 300px; border-radius: 50%; display: block; }
 
 .download-actions { display: flex; flex-direction: column; gap: 10px; width: 100%; margin-top: 15px; }
 
@@ -212,7 +318,7 @@ input[type="color"] {
 .btn-primary:hover, .btn-secondary:hover, .premium-btn:hover { transform: translateY(-2px); }
 
 .features { max-width: 1100px; margin: 0 auto 70px; padding: 0 20px; }
-.features-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
 .feature-box { background: var(--bg-card); padding: 25px; border-radius: 18px; border: 1px solid var(--border-color); text-align: center; }
 
 .developer-section { max-width: 700px; margin: 0 auto 70px; padding: 0 20px; }
