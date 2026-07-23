@@ -1,5 +1,5 @@
 // ==========================================================================
-// Abood Avatar Maker - Fixed Instant Download & Canvas Engine (2026)
+// Abood Avatar Maker - Guaranteed Instant Download Engine (2026)
 // ==========================================================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         topBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
     }
 
-    // 3. إدارة البروفايل والتنبيهات
+    // 3. البروفايل والتنبيهات
     const userNameInput = document.getElementById("userNameInput");
     const saveProfileBtn = document.getElementById("saveProfileBtn");
     const genderBtns = document.querySelectorAll(".gender-btn");
@@ -115,13 +115,33 @@ document.addEventListener("DOMContentLoaded", () => {
     let userImage = new Image();
     let hasLoadedImage = false;
 
-    // صورة افتراضية
-    userImage.src = "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=500";
-    userImage.onload = () => {
-        hasLoadedImage = true;
-        renderCanvas();
-    };
+    // إنشاء صورة افتراضية داخلية (محلية) تمنع حظر التنزيل (Tainted Canvas Fix)
+    function createDefaultImage() {
+        const dummyCanvas = document.createElement("canvas");
+        dummyCanvas.width = 400;
+        dummyCanvas.height = 400;
+        const dCtx = dummyCanvas.getContext("2d");
 
+        dCtx.fillStyle = "#1e293b";
+        dCtx.fillRect(0, 0, 400, 400);
+
+        dCtx.fillStyle = "#3b82f6";
+        dCtx.font = "bold 100px sans-serif";
+        dCtx.textAlign = "center";
+        dCtx.textBaseline = "middle";
+        dCtx.fillText("🚀", 200, 200);
+
+        userImage = new Image();
+        userImage.onload = () => {
+            hasLoadedImage = true;
+            renderCanvas();
+        };
+        userImage.src = dummyCanvas.toDataURL("image/png");
+    }
+
+    createDefaultImage();
+
+    // التعامل مع رفع الصور المحلية من الجهاز
     if (imageInput) {
         imageInput.addEventListener("change", (e) => {
             if (e.target.files.length > 0) {
@@ -160,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // دالة رسم الـ Canvas
+    // دالة رسم الـ Canvas الشاملة
     function renderCanvas() {
         if (!hasLoadedImage) return;
 
@@ -199,7 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.drawImage(userImage, -imgW / 2, -imgH / 2, imgW, imgH);
         ctx.restore();
 
-        // رسم الإطار والشارات
+        // رسم الإطار والشارات والملصقات
         drawBorder(size, center, bWidth);
         drawBadgesAndStickers(size, center);
     }
@@ -277,7 +297,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.restore();
     }
 
-    // أحداث أزرار التدوير والإنعكاس
+    // أحداث أدوات التحكم
     if (rotateLeftBtn) rotateLeftBtn.onclick = () => { rotationAngle -= 90; renderCanvas(); };
     if (rotateRightBtn) rotateRightBtn.onclick = () => { rotationAngle += 90; renderCanvas(); };
     if (flipHBtn) flipHBtn.onclick = () => { flipH *= -1; renderCanvas(); };
@@ -314,38 +334,34 @@ document.addEventListener("DOMContentLoaded", () => {
             borderStyleSelect.value = "solid";
             filterSelect.value = "none";
             badgeSelect.value = "none";
-            renderCanvas();
+            createDefaultImage();
         });
     }
 
     // ==========================================================================
-    // 5. حل مشكلة التحميل المباشر 100% بدون أي تأخير على كل الأجهزة (Blob Stream)
+    // 5. آلية التنزيل المباشر المضمونة 100% (Instant Direct Download)
     // ==========================================================================
     if (downloadBtn) {
         downloadBtn.addEventListener("click", () => {
-            // تحويل الـ Canvas إلى ملف Blob لتنزيله مباشرة بدون مشاكل ذاكرة
-            canvas.toBlob((blob) => {
-                if (!blob) {
-                    alert("حدث خطأ أثناء معالجة الصورة، حاول مجدداً!");
-                    return;
-                }
+            try {
+                // استخراج الرابط المباشر
+                const dataUrl = canvas.toDataURL("image/png");
 
-                // إنشاء رابط تنزيل مباشر ومستقر
-                const blobUrl = URL.createObjectURL(blob);
+                // إنشاء عنصر تنزيل تلقائي وتطبيقه
                 const downloadLink = document.createElement("a");
-                downloadLink.href = blobUrl;
+                downloadLink.href = dataUrl;
                 downloadLink.download = `Abood-Avatar-${Date.now()}.png`;
 
                 document.body.appendChild(downloadLink);
                 downloadLink.click();
                 document.body.removeChild(downloadLink);
 
-                // تنظيف الذاكرة
-                setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
-
                 const genderIcon = savedUser.gender === "male" ? "♂️" : "♀️";
-                showToast(`🎉 تم تنزيل الصورة لجهاز ${savedUser.name} (${genderIcon}) بنجاح!`);
-            }, "image/png", 1.0);
+                showToast(`🎉 تم تنزيل الصورة لجهازك (${savedUser.name} ${genderIcon}) بنجاح!`);
+            } catch (err) {
+                console.error(err);
+                alert("❌ حدث خطأ أثناء التنزيل! يرجى رفع صورة من جهازك أولاً وإعادة المحاولة.");
+            }
         });
     }
 });
