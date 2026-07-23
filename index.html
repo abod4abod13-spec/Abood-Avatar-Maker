@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abood Avatar Maker | صانع ومعدل صور الحسابات الاحترافي</title>
+    <meta name="description" content="صمم إطارات نيونيّة ودائرية احترافية لصور حساباتك في TikTok وInstagram وGaming بأعلى جودة.">
+    <meta name="theme-color" content="#0a0f1c">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- شريط التقدم العلوي -->
+    <div id="scrollProgress"></div>
+
+    <!-- شاشة التحميل الترحيبية -->
+    <div id="splash">
+        <div class="splash-content">
+            <div class="logo-circle">🎨</div>
+            <h1>Abood Avatar Maker</h1>
+            <p>جاري تحضير استوديو تعديل الصور والرموز...</p>
+            <div class="loading-bar">
+                <div class="loading-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- الخلفية المتحركة -->
+    <div class="background">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <button id="topBtn">⬆</button>
+
+    <!-- الهيدر -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">🚀 Abood Avatar</div>
+            <div class="nav-links">
+                <a href="#editor-section">المصمم</a>
+                <a href="#features">المميزات</a>
+                <a href="#developer">المطور</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- واجهة الصفحة الرئيسية -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>صانع صور الحسابات والإطارات الدائرية 👑</h1>
+            <p>اصنع صورة شخصية أسطورية لحسابك في التيك توك أو الألعاب مع إطارات نيون، شارات توثيق، وتأثيرات احترافية بنقرة واحدة!</p>
+        </div>
+    </section>
+
+    <!-- قسم الاستوديو الرئيسي للتعديل -->
+    <section id="editor-section" class="editor-container">
+        <div class="editor-grid">
+            
+            <!-- لوحة التحكم بالتأثيرات (اليمين) -->
+            <div class="controls-card">
+                <h2>🛠️ أدوات التعديل والتصميم</h2>
+                
+                <!-- رفع الصورة -->
+                <div class="control-group">
+                    <label>📸 اختر الصورة الشخصية:</label>
+                    <input type="file" id="imageInput" accept="image/*" hidden>
+                    <button class="btn-primary" onclick="document.getElementById('imageInput').click()">رفع صورة من الجهاز</button>
+                </div>
+
+                <!-- نمط الإطار -->
+                <div class="control-group">
+                    <label>🎨 اختر نمط الإطار:</label>
+                    <select id="borderStyleSelect" class="styled-select">
+                        <option value="solid">إطار دائري عادي (Solid)</option>
+                        <option value="neon">إطار نيون مضيء (Glow)</option>
+                        <option value="gradient">تدرج ألوان احترافي (Gradient)</option>
+                        <option value="dashed">مقطع أجزاء (Dashed Grid)</option>
+                        <option value="double">إطار مزدوج (Double Ring)</option>
+                    </select>
+                </div>
+
+                <!-- ألوان الإطار -->
+                <div class="control-group">
+                    <label>🌈 لون الإطار / التوهج:</label>
+                    <div class="color-pickers">
+                        <input type="color" id="borderColor1" value="#3b82f6" title="اللون الرئيسي">
+                        <input type="color" id="borderColor2" value="#ec4899" title="اللون الثانوي">
+                    </div>
+                </div>
+
+                <!-- سمك الإطار والتقريب -->
+                <div class="control-group">
+                    <label>📐 سمك الإطار: <span id="borderWidthVal">10</span>px</label>
+                    <input type="range" id="borderWidth" min="0" max="30" value="10">
+                </div>
+
+                <div class="control-group">
+                    <label>🔍 حجم وتكبير الصورة: <span id="zoomVal">100</span>%</label>
+                    <input type="range" id="zoomLevel" min="50" max="200" value="100">
+                </div>
+
+                <!-- الشارات والمسميات -->
+                <div class="control-group">
+                    <label>🎖️ إضافة شارة توثيق أو رمز:</label>
+                    <select id="badgeSelect" class="styled-select">
+                        <option value="none">بدون شارة</option>
+                        <option value="verified_blue">✔️ توثيق أزرق (Verified)</option>
+                        <option value="verified_gold">⭐ توثيق ذهبي (Gold VIP)</option>
+                        <option value="pro">🔥 شارة PRO</option>
+                        <option value="crown">👑 تاج أسطوري</option>
+                        <option value="gaming">🎮 رمز ألعاب</option>
+                    </select>
+                </div>
+
+                <!-- فلتر الألوان -->
+                <div class="control-group">
+                    <label>🎭 تأثرات الألوان والفلاتر:</label>
+                    <select id="filterSelect" class="styled-select">
+                        <option value="none">بدون فلتر (طبيعي)</option>
+                        <option value="contrast">سطوع وتباين عالي</option>
+                        <option value="grayscale">أبيض وأسود فاخر</option>
+                        <option value="cyberpunk">ثيم سايبر بنك (Cyberpunk)</option>
+                        <option value="vintage">ثيم كلاسيكي (Warm)</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <!-- لوحة المعاينة الحية والتنزيل (اليسار) -->
+            <div class="preview-card">
+                <h2>👁️ المعاينة المباشرة</h2>
+                <div class="canvas-wrapper">
+                    <canvas id="avatarCanvas" width="400" height="400"></canvas>
+                </div>
+
+                <div class="download-actions">
+                    <button id="downloadBtn" class="download-btn premium-btn">⚡ تحميل الصورة بجودة 4K HD</button>
+                    <button id="resetBtn" class="btn-secondary">إعادة ضبط</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- المميزات -->
+    <section id="features" class="features">
+        <h2 class="section-title">✨ مميزات الأداة</h2>
+        <div class="features-grid">
+            <div class="feature-box">⚡<h3>معالجة فورية</h3><p>تعديل مباشر على الصورة داخل المتصفح بدون الانتظار أو الرفع لسيرفرات.</p></div>
+            <div class="feature-box">🎯<h3>دقة فائقة HD</h3><p>استخراج صور بحجم أبعاد مخصص وعالي الدقة لكل منصات التواصل.</p></div>
+            <div class="feature-box">🔒<h3>خصوصية 100%</h3><p>صورك لا تغادر جهازك وتتم معالجتها آلياً بأعلى درجات الأمان.</p></div>
+        </div>
+    </section>
+
+    <!-- كرت المطور المحدث بالحسابات الجديدة -->
+    <section id="developer" class="developer-section">
+        <h2 class="section-title">👨‍💻 المطور</h2>
+        <div class="developer-card">
+            <div class="developer-avatar">🚀</div>
+            <h3>عبدالله</h3>
+            <p>مطور تطبيقات أندرويد ومصمم مشاريع ويب تقنية حديثة.</p>
+            <div class="developer-links">
+                <div>📱 TikTok 1: dark4abod</div>
+                <div>📱 TikTok 2: 1K__e___r</div>
+                <div>✈️ Telegram: rasf10</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <h2>Abood Avatar Maker</h2>
+        <p>جميع الحقوق محفوظة © <span id="year"></span></p>
+        <p>تم تصميم وتطوير المنصة بواسطة عبدالله</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
