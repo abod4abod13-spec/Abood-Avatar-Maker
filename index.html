@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abood Avatar Maker | صانع ومعدل صور الحسابات الاحترافي</title>
-    <meta name="description" content="استوديو متكامل لتعديل وتصميم صور الحسابات الشخصية، الإطارات النيون، الفلاتر والملصقات بدقة 4K.">
+    <title>Abood Avatar Maker Pro | صانع ومعدل صور الحسابات الاحترافي</title>
+    <meta name="description" content="استوديو متكامل لتعديل وتصميم صور الحسابات الشخصية، الإطارات النيون، الفلاتر والملصقات بدقة 4K مع تنزيل فوري ومباشر.">
     <meta name="theme-color" content="#0a0f1c">
     
     <link rel="stylesheet" href="style.css">
@@ -21,8 +21,8 @@
     <div id="splash">
         <div class="splash-content">
             <div class="logo-circle">🎨</div>
-            <h1>Abood Avatar Maker</h1>
-            <p>جاري تحضير استوديو التصميم المتكامل...</p>
+            <h1>Abood Avatar Maker Pro</h1>
+            <p>جاري تحضير استوديو التصميم المتكامل والتنزيل المباشر...</p>
             <div class="loading-bar">
                 <div class="loading-fill"></div>
             </div>
@@ -61,7 +61,7 @@
     <section class="hero">
         <div class="hero-content">
             <h1>استوديو صانع ومعدل صور الحسابات الشامل 👑</h1>
-            <p>صمم إطارك الشخصي، أضف ملصقاتك وإشارات التوثيق، عدل الألوان وتدوير الصورة بأعلى دقة 4K مجاناً!</p>
+            <p>صمم إطارك الشخصي، أضف ملصقاتك وإشارات التوثيق، عدل الألوان وتدوير الصورة بأعلى دقة مع تنزيل مباشر بنقرة واحدة!</p>
         </div>
     </section>
 
@@ -124,7 +124,6 @@
                         <option value="dashed">إطار مقطع (Dashed Cyber)</option>
                         <option value="double">إطار حلقة مزدوجة (Double Ring)</option>
                         <option value="square">إطار مربعي عصري (Square Radius)</option>
-                        <option value="hexagon">إطار سداسي (Hexagon Shape)</option>
                     </select>
                 </div>
 
@@ -176,9 +175,7 @@
                 <!-- مكتبة الملصقات الشاملة -->
                 <div class="control-group">
                     <label>🧸 مكتبة الملصقات والرموز (اضغط للإضافة على الصورة):</label>
-                    <div id="stickersBox" class="stickers-grid">
-                        <!-- يتم إنشاؤها عبر JavaScript -->
-                    </div>
+                    <div id="stickersBox" class="stickers-grid"></div>
                 </div>
 
             </div>
@@ -186,12 +183,12 @@
             <!-- لوحة المعاينة الحية والتنزيل الفوري (اليسار) -->
             <div class="preview-card">
                 <h2>👁️ المعاينة المباشرة والشاشات</h2>
-                <div class="canvas-wrapper">
+                <div class="canvas-wrapper pulse-animation">
                     <canvas id="avatarCanvas" width="500" height="500"></canvas>
                 </div>
 
                 <div class="download-actions">
-                    <button id="downloadBtn" class="download-btn premium-btn">⚡ تنزيل الصورة فوراً بدقة 4K Ultra HD</button>
+                    <button id="downloadBtn" class="download-btn premium-btn btn-click-effect">⚡ تنزيل الصورة فوراً وبشكل مباشر (HD/4K)</button>
                     <button id="resetBtn" class="btn-secondary">إعادة ضبط التعديلات</button>
                 </div>
             </div>
@@ -203,7 +200,7 @@
     <section id="features" class="features">
         <h2 class="section-title">✨ مميزات الاستوديو</h2>
         <div class="features-grid">
-            <div class="feature-box">⚡<h3>تحميل بدقة 4K</h3><p>حفظ الصور بدقة فائقة بحجم 2000x2000 بكسل وبسرعة تنزيل فائقة.</p></div>
+            <div class="feature-box">⚡<h3>تحميل مباشر</h3><p>تصدير ذكي عبر نظام Blobs لتحميل سريع ومباشر بجميع الهواتف.</p></div>
             <div class="feature-box">🎨<h3>تدوير وإنعكاس</h3><p>تحكم كامل في الاتجاهات، الإنعكاس الأفقي والرأسي والتدوير الدقيق.</p></div>
             <div class="feature-box">🎖️<h3>شارات ملصقات</h3><p>مكتبة ملصقات غنية وشارات توثيق لجميع شبكات التواصل.</p></div>
             <div class="feature-box">🔒<h3>حفظ آمن ومباشر</h3><p>معالجة سريعة بدون رفع للأنترنت تضمن سرية وسلامة صورك.</p></div>
@@ -227,7 +224,7 @@
 
     <!-- الفوتر -->
     <footer>
-        <h2>Abood Avatar Maker</h2>
+        <h2>Abood Avatar Maker Pro</h2>
         <p>جميع الحقوق محفوظة © <span id="year"></span></p>
         <p>تم تصميم وتطوير المنصة بواسطة عبدالله</p>
     </footer>
@@ -235,4 +232,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
