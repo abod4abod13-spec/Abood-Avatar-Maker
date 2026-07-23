@@ -1,5 +1,5 @@
 // ==========================================================================
-// Abood Avatar Maker - Guaranteed Instant Download Engine (2026)
+// Abood Avatar Maker - Direct Link & Fallback Download Engine (2026)
 // ==========================================================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => { toast.remove(); }, 4000);
     }
 
-    // 4. محرك الـ Canvas والتعديل المباشر
+    // 4. محرك الـ Canvas
     const canvas = document.getElementById("avatarCanvas");
     const ctx = canvas.getContext("2d");
 
@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let userImage = new Image();
     let hasLoadedImage = false;
 
-    // إنشاء صورة افتراضية داخلية (محلية) تمنع حظر التنزيل (Tainted Canvas Fix)
+    // رسم صورة افتراضية ملائمة محلياً
     function createDefaultImage() {
         const dummyCanvas = document.createElement("canvas");
         dummyCanvas.width = 400;
@@ -141,7 +141,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     createDefaultImage();
 
-    // التعامل مع رفع الصور المحلية من الجهاز
     if (imageInput) {
         imageInput.addEventListener("change", (e) => {
             if (e.target.files.length > 0) {
@@ -180,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // دالة رسم الـ Canvas الشاملة
+    // دالة الرسم الرئيسية
     function renderCanvas() {
         if (!hasLoadedImage) return;
 
@@ -197,7 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.fillRect(0, 0, size, size);
         ctx.restore();
 
-        // الفلاتر وقص القناع
+        // الفلاتر
         ctx.save();
         ctx.filter = getFilterString(filterSelect.value);
 
@@ -209,7 +208,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         ctx.clip();
 
-        // التدوير والإنعكاس والحجم
         ctx.translate(center, center);
         ctx.rotate((rotationAngle * Math.PI) / 180);
         ctx.scale(flipH, flipV);
@@ -219,9 +217,11 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.drawImage(userImage, -imgW / 2, -imgH / 2, imgW, imgH);
         ctx.restore();
 
-        // رسم الإطار والشارات والملصقات
         drawBorder(size, center, bWidth);
         drawBadgesAndStickers(size, center);
+
+        // تحديث الرابط المباشر
+        updateFallbackBox();
     }
 
     function getFilterString(filter) {
@@ -297,7 +297,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.restore();
     }
 
-    // أحداث أدوات التحكم
+    // أحداث التحكم
     if (rotateLeftBtn) rotateLeftBtn.onclick = () => { rotationAngle -= 90; renderCanvas(); };
     if (rotateRightBtn) rotateRightBtn.onclick = () => { rotationAngle += 90; renderCanvas(); };
     if (flipHBtn) flipHBtn.onclick = () => { flipH *= -1; renderCanvas(); };
@@ -339,29 +339,74 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================================================
-    // 5. آلية التنزيل المباشر المضمونة 100% (Instant Direct Download)
+    // 5. إنشاء وتحديث صندوق الرابط المباشر للحل المضمون (Direct Download Link)
     // ==========================================================================
+    const previewCard = document.querySelector(".preview-card");
+    let fallbackBox = document.getElementById("fallbackDownloadBox");
+
+    if (!fallbackBox && previewCard) {
+        fallbackBox = document.createElement("div");
+        fallbackBox.id = "fallbackDownloadBox";
+        fallbackBox.style.marginTop = "20px";
+        fallbackBox.style.padding = "15px";
+        fallbackBox.style.background = "rgba(0,0,0,0.4)";
+        fallbackBox.style.border = "1px solid rgba(255,255,255,0.1)";
+        fallbackBox.style.borderRadius = "14px";
+        fallbackBox.style.width = "100%";
+        fallbackBox.style.textAlign = "center";
+
+        fallbackBox.innerHTML = `
+            <p style="font-size: 13px; color: #94a3b8; margin-bottom: 10px;">
+                ⚠️ إذا لم يبدأ التنزيل تلقائياً، افتح الرابط المباشر أو انقر عليه لحفظ الصورة:
+            </p>
+            <div style="display: flex; gap: 8px; justify-content: center;">
+                <button id="openImgBtn" class="btn-primary" style="padding: 8px 15px; font-size: 13px;">👁️ فتح الصورة بصفحة جديدة</button>
+                <button id="copyImgUrlBtn" class="btn-secondary" style="padding: 8px 15px; font-size: 13px;">📋 نسخ رابط الصورة</button>
+            </div>
+        `;
+        previewCard.appendChild(fallbackBox);
+    }
+
+    function updateFallbackBox() {
+        const dataUrl = canvas.toDataURL("image/png");
+
+        const openImgBtn = document.getElementById("openImgBtn");
+        const copyImgUrlBtn = document.getElementById("copyImgUrlBtn");
+
+        if (openImgBtn) {
+            openImgBtn.onclick = () => {
+                const newWin = window.open();
+                if (newWin) {
+                    newWin.document.write(`<img src="${dataUrl}" style="max-width:100%; height:auto;" />`);
+                } else {
+                    alert("يرجى السماح بالنوافذ المنبثقة من إعدادات المتصفح!");
+                }
+            };
+        }
+
+        if (copyImgUrlBtn) {
+            copyImgUrlBtn.onclick = () => {
+                navigator.clipboard.writeText(dataUrl);
+                showToast("📋 تم نسخ بيانات الصورة إلى الحافظة!");
+            };
+        }
+    }
+
+    // زر التنزيل الأساسي
     if (downloadBtn) {
         downloadBtn.addEventListener("click", () => {
-            try {
-                // استخراج الرابط المباشر
-                const dataUrl = canvas.toDataURL("image/png");
+            const dataUrl = canvas.toDataURL("image/png");
+            const downloadLink = document.createElement("a");
+            downloadLink.href = dataUrl;
+            downloadLink.download = `Abood-Avatar-${Date.now()}.png`;
 
-                // إنشاء عنصر تنزيل تلقائي وتطبيقه
-                const downloadLink = document.createElement("a");
-                downloadLink.href = dataUrl;
-                downloadLink.download = `Abood-Avatar-${Date.now()}.png`;
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
 
-                document.body.appendChild(downloadLink);
-                downloadLink.click();
-                document.body.removeChild(downloadLink);
-
-                const genderIcon = savedUser.gender === "male" ? "♂️" : "♀️";
-                showToast(`🎉 تم تنزيل الصورة لجهازك (${savedUser.name} ${genderIcon}) بنجاح!`);
-            } catch (err) {
-                console.error(err);
-                alert("❌ حدث خطأ أثناء التنزيل! يرجى رفع صورة من جهازك أولاً وإعادة المحاولة.");
-            }
+            const genderIcon = savedUser.gender === "male" ? "♂️" : "♀️";
+            showToast(`🎉 تم بدء تنزيل الصورة لـ ${savedUser.name} (${genderIcon})!`);
         });
     }
 });
+
