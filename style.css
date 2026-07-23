@@ -1,0 +1,241 @@
+/* ==========================================================================
+   Abood Avatar Maker - Dark Studio Theme (2026)
+   ========================================================================== */
+
+:root {
+    --bg-main: #0a0f1c;
+    --bg-card: rgba(19, 27, 46, 0.75);
+    --bg-card-hover: rgba(28, 39, 64, 0.95);
+    --border-color: rgba(255, 255, 255, 0.08);
+    --text-main: #ffffff;
+    --text-muted: #94a3b8;
+    
+    --color-primary: #3b82f6;
+    --color-primary-glow: rgba(59, 130, 246, 0.35);
+    --color-accent: #10b981;
+    --color-premium: #f59e0b;
+    --color-pink: #ec4899;
+
+    --font-cairo: 'Cairo', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-cairo);
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+#scrollProgress {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-pink), var(--color-accent));
+    width: 0%;
+    z-index: 10000;
+}
+
+#splash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--bg-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.8s ease;
+}
+
+.splash-content { text-align: center; }
+.splash-content h1 {
+    font-size: 36px;
+    font-weight: 900;
+    background: linear-gradient(45deg, #fff, var(--color-primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logo-circle {
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(45deg, var(--color-primary), var(--color-pink));
+    border-radius: 50%;
+    margin: 0 auto 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    box-shadow: 0 0 30px var(--color-primary-glow);
+    animation: splashPulse 2s infinite alternate;
+}
+
+@keyframes splashPulse {
+    0% { transform: scale(0.9); }
+    100% { transform: scale(1.05); }
+}
+
+.loading-bar {
+    width: 220px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    margin: 25px auto 0;
+    overflow: hidden;
+}
+
+.loading-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-pink));
+    animation: fillProgress 1.8s forwards;
+}
+
+@keyframes fillProgress { 0% { width: 0%; } 100% { width: 100%; } }
+
+header {
+    background-color: rgba(10, 15, 28, 0.75);
+    backdrop-filter: blur(15px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 900;
+    background: linear-gradient(45deg, #fff, var(--color-primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-right: 25px;
+    font-weight: 700;
+}
+
+.hero {
+    text-align: center;
+    padding: 70px 20px 30px;
+    background: radial-gradient(circle at top, rgba(59, 130, 246, 0.15) 0%, transparent 60%);
+}
+
+.hero h1 { font-size: 38px; font-weight: 900; margin-bottom: 15px; }
+.hero p { color: var(--text-muted); font-size: 17px; max-width: 650px; margin: 0 auto; }
+
+/* شبكة الاستوديو المحترفة */
+.editor-container { max-width: 1100px; margin: 0 auto 60px; padding: 0 20px; }
+.editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+@media (max-width: 850px) { .editor-grid { grid-template-columns: 1fr; } }
+
+.controls-card, .preview-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+.controls-card h2, .preview-card h2 { font-size: 20px; font-weight: 800; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+
+.control-group { margin-bottom: 18px; text-align: right; }
+.control-group label { display: block; font-size: 14px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; }
+
+.styled-select, input[type="range"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background: rgba(0,0,0,0.3);
+    color: white;
+    font-size: 14px;
+    outline: none;
+}
+
+.color-pickers { display: flex; gap: 15px; }
+input[type="color"] {
+    border: none;
+    width: 50px;
+    height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    background: none;
+}
+
+/* لوحة المعاينة والـ Canvas */
+.preview-card { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.canvas-wrapper { margin: 20px 0; border-radius: 50%; padding: 10px; background: rgba(255,255,255,0.02); border: 1px dashed var(--border-color); }
+#avatarCanvas { width: 280px; height: 280px; border-radius: 50%; display: block; }
+
+.download-actions { display: flex; flex-direction: column; gap: 10px; width: 100%; margin-top: 15px; }
+
+.btn-primary, .btn-secondary, .download-btn {
+    width: 100%;
+    padding: 13px 0;
+    border-radius: 12px;
+    border: none;
+    font-weight: 800;
+    font-size: 15px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.btn-primary { background: linear-gradient(135deg, var(--color-primary), #1d4ed8); color: white; }
+.btn-secondary { background: rgba(255,255,255,0.08); color: white; border: 1px solid var(--border-color); }
+.premium-btn { background: linear-gradient(135deg, var(--color-accent), #059669); color: white; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
+
+.btn-primary:hover, .btn-secondary:hover, .premium-btn:hover { transform: translateY(-2px); }
+
+.features { max-width: 1100px; margin: 0 auto 70px; padding: 0 20px; }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+.feature-box { background: var(--bg-card); padding: 25px; border-radius: 18px; border: 1px solid var(--border-color); text-align: center; }
+
+.developer-section { max-width: 700px; margin: 0 auto 70px; padding: 0 20px; }
+.developer-card { background: var(--bg-card); border: 1px solid var(--border-color); padding: 30px; border-radius: 22px; text-align: center; }
+.developer-avatar { width: 75px; height: 75px; background: rgba(255,255,255,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; margin: 0 auto 15px; }
+.developer-links { display: flex; justify-content: center; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
+.developer-links div { background: rgba(255,255,255,0.04); padding: 8px 16px; border-radius: 10px; border: 1px solid var(--border-color); font-weight: 700; font-size: 14px; }
+
+#topBtn { position: fixed; bottom: 30px; left: 30px; background: linear-gradient(135deg, var(--color-primary), var(--color-pink)); color: white; border: none; width: 48px; height: 48px; border-radius: 50%; cursor: pointer; display: none; z-index: 999; }
+
+footer { text-align: center; padding: 40px 20px; background-color: #050811; border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 14px; }
+
+.background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.04; pointer-events: none; }
+.background span { position: absolute; display: block; width: 25px; height: 25px; background: #ffffff; animation: floatingBubbles 25s linear infinite; bottom: -150px; }
+.background span:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+.background span:nth-child(2) { left: 10%; width: 30px; height: 30px; animation-delay: 2s; animation-duration: 12s; }
+.background span:nth-child(3) { left: 70%; width: 25px; height: 25px; animation-delay: 4s; }
+.background span:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+.background span:nth-child(5) { left: 85%; width: 45px; height: 45px; animation-delay: 5s; }
+.background span:nth-child(6) { left: 60%; width: 20px; height: 20px; animation-delay: 8s; }
+
+@keyframes floatingBubbles {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 4px; }
+    100% { transform: translateY(-1200px) rotate(720deg); opacity: 0; border-radius: 50%; }
+}
+
